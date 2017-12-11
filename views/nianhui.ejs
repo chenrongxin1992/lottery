@@ -1,0 +1,78 @@
+<html>
+<head>
+    <title>2018--Happy New Year</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- Bootstrap -->
+    <link rel='stylesheet' href='/lottery/stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' href='/lottery/stylesheets/style.css' />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        .lotterybox{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" style="padding: 0 0 ">
+        <div class="row-fluid">
+            <span>nianhui</span>
+        </div>
+        <div class="row-fluid">
+            <div class="lotterybox"></div>
+        </div>
+    </div>
+    
+    <!-- Zepto or jQuery/lottery/stylesheets/style.css -->
+    <script src="/lottery/javascripts/zepto.min.js"></script>
+    <link rel="stylesheet" href="/lottery/stylesheets/lottery.min.css" />
+    <script src="/lottery/javascripts/lottery.compact.min.js"></script>
+
+    <!-- ROCK ON -->
+    <script>
+        $(function(){
+            $.ajax({
+              url: '/lottery/getheadimgdata', 
+              async: true,
+              dataType: 'json',
+              type: 'GET',
+              success: function(result){
+                console.log('ajax success')
+                console.log(result)
+                if(result.errCode == 0){
+                    $.lottery({
+                        el: '.lotterybox',
+                        //api: './sample-data.json',
+                        once: false, // winner can not repeatable
+                        subtitle: "xueyuan",
+                        // desc: "title",
+                        timeout: 10,
+                        confetti: true, // show confetti effects
+                        speed: 200, // interval time to next candidate, the unit is ms
+                        number: 1,// how many winner will be get at one time
+                        data:result.data
+                    });
+                }
+              },
+              error: function(e){
+                console.log(e)
+                console.log("error");
+              },
+          })
+        })
+    </script>
+</body>
+</html>
