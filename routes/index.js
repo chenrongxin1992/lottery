@@ -120,6 +120,10 @@ router.get('/nianhui',function(req,res){
 	res.render('nianhui');
 })
 
+function randomsort(a, b) {
+   return Math.random()>.5 ? -1 : 1; //通过随机产生0到1的数，然后判断是否大于0.5从而影响排序，产生随机性的效果。
+}
+
 router.get('/getheadimgdata',function(req,res){
 	let newdata = new Array()
 	let search = wxuserinfo.find({})
@@ -141,6 +145,8 @@ router.get('/getheadimgdata',function(req,res){
 						tmp = {}
 				}
 				console.log('newdata-->',newdata)
+				newdata.sort(randomsort)
+				console.log('乱序-->',newdata)
 				return res.json({'errCode':0,'data':newdata})
 			}
 			if(!docs){

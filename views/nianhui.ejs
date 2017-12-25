@@ -65,11 +65,13 @@
                         number: 1,// how many winner will be get at one time
                         data:result.data
                     });
+                    return
                 }
               },
               error: function(e){
                 console.log(e)
-                console.log("error");
+                console.error("error");
+                return
               },
           })
         })
