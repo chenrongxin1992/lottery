@@ -12,6 +12,12 @@ function sha1(str) {
     return str;  
 } 
 
+//二维码进入，跳进授权链接
+router.get('/guide',function(req,res){
+	console.log('redirect')
+	res.redirect(302,'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx711b069e8a1bbdcb&redirect_uri=http%3A%2F%2Fbdsc.szu.edu.cn%2Flottery%2Fgetuserinfo&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect')
+})
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	let signature = req.query.signature,
@@ -95,7 +101,8 @@ router.get('/getuserinfo',function(req,res){
 									return res.json({'errMsg':'error occured'})
 								}
 								console.log('----- 更新成功 -----')
-								return res.json({'errMsg':'更新成功 render a page'})
+								return res.render('welcome')
+								//return res.json({'errMsg':'更新成功 render a page'})
 							})
 						}
 						if(!doc || doc.length ==0){
@@ -106,7 +113,8 @@ router.get('/getuserinfo',function(req,res){
 									return res.json({'errMsg':'error occured'})
 								}
 								console.log('----- save _wxuserinfo success ----')
-								return res.json({'errMsg':'success render a page'})
+								return res.render('welcome')
+								//return res.json({'errMsg':'success render a page'})
 							})
 						}
 					})
@@ -168,6 +176,40 @@ router.get('/add',function(req,res){
 	})
 	_wxuserinfo.save(function(err){
 		return res.json({'errMsg':'success'})
+	})
+})
+
+router.get('/test',function(req,res){
+	let newdata = new Array()
+	let search = wxuserinfo.find({ is_used:{ $ne:1}})
+		search.exec(function(err,docs){
+			if(err){
+				console.log('err-->',err)
+				return res.json({'err':err})
+			}
+			if(docs){
+				//console.log('newdata-->',newdata)
+				docs.sort(randomsort)
+				console.log('乱序-->',docs)
+				return res.render('test',{userinfo:docs})
+			}
+			if(!docs){
+				console.log('----- no result -----')
+				return false
+			}
+			// console.log('docs-->',docs)
+			// res.render('test',{userinfo:docs})
+		})
+})
+router.post('/delete_el',function(req,res){
+	let _id = req.body._id
+	console.log('check _id-->',_id)
+	wxuserinfo.remove({'_id':_id},function(err){
+		if(err){
+			console.log('err-->',err)
+			return res.json({'errCode':-1,'errMsg':err})
+		}
+		return res.json({'errCode':0,'errMsg':'remove success'})
 	})
 })
 module.exports = router;

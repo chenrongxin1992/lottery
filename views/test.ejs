@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>2018 Happy New Year</title>
+<link rel="stylesheet" type="text/css" href="/lottery/stylesheets/lottery.css" />
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="lottery">
+        <div id='head'>
+            <p>2018 元 旦 团 拜 会 抽 奖</p>
+        </div>
+        <div id="lottery-hero">
+            <img src="/lottery/images/default.jpg" alt=""  />
+            <p>default</p>
+        </div>
+
+        <div id="lottery-container">
+            <ul>
+                <% var i = 0; userinfo.forEach(function(item){ i++; %>
+                    <li id="<%=item._id%>"><img src="<%=item.headimgurl%>" title="<%=item.nickname%>" attr="<%=item._id%>"></li>
+                <%})%>
+            </ul>
+        </div>
+        <div id="lottery-control">
+            <a href="#" onclick="Lottery.start()">开始</a>
+            <a href="#" onclick="Lottery.stop()">停止</a>
+        </div>
+        <div id="lottery-selected"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/lottery/javascripts/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="/lottery/javascripts/lottery.js"></script>
+
+
+</body>
+</html>

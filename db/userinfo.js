@@ -16,7 +16,8 @@ var wxuserinfoSchema = new Schema({
     country : {type:String},
     headimgurl :{type:String},//
     createTime : {type : String, default : moment().format('YYYY-MM-DD HH:mm:ss') },  
-    createTimeStamp : {type : String,default:moment().format('X')}
+    createTimeStamp : {type : String,default:moment().format('X')},
+    is_used : {type:Number,default:0}//0未使用，1已使用
 })
 
 module.exports = mongoose.model('wxuserinfo',wxuserinfoSchema);
