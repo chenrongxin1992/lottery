@@ -201,10 +201,11 @@ router.get('/test',function(req,res){
 			// res.render('test',{userinfo:docs})
 		})
 })
+//apply.update({'_id':_id},{$set:{'is_approved':is_approved}},function(err){
 router.post('/delete_el',function(req,res){
 	let _id = req.body._id
 	console.log('check _id-->',_id)
-	wxuserinfo.remove({'_id':_id},function(err){
+	wxuserinfo.update({'_id':_id},{$set:{'is_used':1}},function(err){
 		if(err){
 			console.log('err-->',err)
 			return res.json({'errCode':-1,'errMsg':err})
