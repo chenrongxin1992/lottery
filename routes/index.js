@@ -124,7 +124,7 @@ router.get('/getuserinfo',function(req,res){
 	})
 })
 
-router.get('/nianhui',function(req,res){
+router.get('/nianhui_',function(req,res){
 	res.render('nianhui');
 })
 
@@ -179,7 +179,7 @@ router.get('/add',function(req,res){
 	})
 })
 
-router.get('/test',function(req,res){
+router.get('/nianhui',function(req,res){
 	let newdata = new Array()
 	let search = wxuserinfo.find({ is_used:{ $ne:1}})
 		search.exec(function(err,docs){

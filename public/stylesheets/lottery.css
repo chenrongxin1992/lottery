@@ -15,7 +15,7 @@ body{
 }
 
 #lottery ul {
-    width: 27000px;
+    /*width: 1000px;*/
     position: absolute;
     list-style: none;
     margin: 0;
